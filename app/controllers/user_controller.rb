@@ -9,14 +9,14 @@ class UserController < ApplicationController
         erb :"registrations/signup"
     end
 
-    post '/resgistrations' do 
+    post '/registrations' do 
         #binding.pry
-        #@user = User.new(name: params["name"], email: params["email"], password: params["password"])
-        #@user.save
-        #session[:user_id] = @user.id
+        @user = User.new(name: params["name"], email: params["email"], password: params["password"])
+        @user.save
+        session[:user_id] = @user.id
         #puts params
         "hello world "
-        #redirect '/users/home'
+        redirect '/users/home'
     end
 
     get '/sessions/login' do 
@@ -24,7 +24,14 @@ class UserController < ApplicationController
     end
 
     post '/sessions' do 
-
+        @user = User.find_by(email: params[:email])
+        if @user != nil && @user.password == params[:password] 
+            # set our sesssion hash and redirect accordingly
+            session[:user_id] = @user.id
+            redirect '/users/home'
+        else 
+            redirect '/essions/login'
+        end 
     end
 
     get '/sessions/logout' do 
@@ -32,6 +39,7 @@ class UserController < ApplicationController
     end
 
     get '/users/home' do 
+        @user = User.find_by(id: params[:user_id])
         erb :'users/home'
     end
 
