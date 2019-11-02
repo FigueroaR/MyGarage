@@ -5,6 +5,17 @@ class CarController < ApplicationController
         erb :"users/garage"
     end
     
+    get '/sessions/car/:id' do
+        
+        @car = Car.find_by(id: params[:id])      
+         #binding.pry
+        if @car
+           erb :'users/show'
+        else 
+           redirect '/garage'
+        end 
+     end
+
     #create new car
     get '/sessions/new/car' do 
         erb :'registrations/newcar'
@@ -20,19 +31,10 @@ class CarController < ApplicationController
     end
 
     #iterate through my garage
-    get 'sessions/car/:id' do 
-        @car = Car.find_by(id: params[:car_id])
-        if @car 
-            erb :'users/garage' 
-        else
-            redirect "/users/home"
-        end
-    end
-
     post 'sessions/car/:id' do 
-        @car = Car.new(params)
-        if @car.save 
-            redirect "sessions/car/#{@car.id}"
+        @car = Car.find_by(id: params[:car_id])
+        if @car.save
+            redirect "sessions/car/#{@car.id}" 
         else 
             redirect '/users/home'
         end
