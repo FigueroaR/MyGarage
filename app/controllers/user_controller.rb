@@ -30,7 +30,7 @@ class UserController < ApplicationController
             session[:user_id] = @user.id
             redirect '/users/home'
         else 
-            redirect '/essions/login'
+            redirect '/sessions/login'
         end 
     end
 
@@ -43,4 +43,7 @@ class UserController < ApplicationController
         erb :'users/home'
     end
 
+    get '/sessions/new/car' do 
+        erb :'registrations/newcar'
+    end
 end 
