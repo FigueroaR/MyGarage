@@ -34,12 +34,19 @@ class CarController < ApplicationController
     post 'sessions/car/:id' do 
         @car = Car.find_by(id: params[:car_id])
         if @car.save
-            redirect "sessions/car/#{@car.id}" 
+            redirect "/sessions/car/#{@car.id}" 
         else 
             redirect '/users/home'
         end
     end
 
-
+    post '/car/:id' do 
+        @car = Car.find_by(id: params[:id])
+        if @car.destroy
+          redirect "/garage"
+        else
+          redirect "/users/home"
+        end
+    end
 
 end
