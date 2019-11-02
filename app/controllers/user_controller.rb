@@ -14,6 +14,7 @@ class UserController < ApplicationController
         @user = User.new(name: params["name"], email: params["email"], password: params["password"])
         @user.save
         session[:user_id] = @user.id
+        
         #puts params
         "hello world "
         redirect '/users/home'
@@ -39,7 +40,7 @@ class UserController < ApplicationController
     end
 
     get '/users/home' do 
-        
+        @user = User.all
         erb :'users/home'
     end
 
