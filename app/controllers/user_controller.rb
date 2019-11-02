@@ -39,7 +39,7 @@ class UserController < ApplicationController
     end
 
     get '/users/home' do 
-        @user = User.find_by(id: params[:user_id])
+        
         erb :'users/home'
     end
 

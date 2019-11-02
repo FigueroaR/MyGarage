@@ -1,0 +1,9 @@
+
+<ul>
+    <% @car.each do |kar| %>
+        <li><a href="/sessions/car/<%= kar.id %>"><%= kar.make %>, <%= kar.model %>, <%= kar.year %> </a></li>
+    <% end %>
+</ul>
+
+<a href="/sessions/new/car">Add Car</a>
+<a href="/users/home">Home</a>
