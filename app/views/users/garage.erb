@@ -1,9 +1,9 @@
-<h1> Welcome</h1>
+<h1> Welcome, <%=@user.name%></h1>
 <ul>
-    <% @car.each do |kar| %>
-        <li><a href="/sessions/car/<%= kar.id %>"><%= kar.make %>, <%= kar.model %>, <%= kar.year %> </a></li>
+    <% @user.cars.each do |kar| %>
+        <li><a href="/car/<%=kar.id%>"><%= kar.make %>, <%= kar.model %>, <%= kar.year %> </a></li>
     <% end %>
 </ul>
 
-<a href="/sessions/new/car">Add Car</a>
+<a href="/new/car">Add Car</a>
 <a href="/users/home">Home</a>

@@ -6,6 +6,5 @@ end
 
 
 run ApplicationController
-use MercedezController
 use UserController
 use CarController

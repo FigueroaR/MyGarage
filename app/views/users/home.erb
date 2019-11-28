@@ -1,6 +1,12 @@
 <h1> Welcome, <%=@user.name%> </h1>
 
+<%Car.all.each do |c| %>
+  <li><a href="/car/<%=c.id%>"><%=c.user.name%>, <%=c.model%>, <%=c.make%>, <%=c.year%></a></li>
+<%end%>
 
 
-<a href="/garage"> My Garage</a>
-<a href="/sessions/logout">Log Out</a>
+<br>
+<a href="/garage"> |My Garage|</a>
+<br>
+<br>
+<a href="/logout"> |Log Out| </a>
