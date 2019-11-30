@@ -3,44 +3,68 @@ class UserController < ApplicationController
 
     get '/login' do 
         #binding.pry
-        erb :'sessions/login'
+        if logged_in?
+            redirect '/users/home'
+        else
+            erb :'sessions/login'
+        end
     end
 
     post '/login' do 
-        @user = User.find_by(email: params[:email])
+        if logged_in?
+            @user = User.find_by(email: params[:email])
         #binding.pry
-        if @user != nil && @user.authenticate(params[:password]) 
-            # set our sesssion hash and redirect accordingly
-            session[:user_id] = @user.id
-            redirect '/users/home'
+            if @user != nil && @user.authenticate(params[:password]) 
+                # set our sesssion hash and redirect accordingly
+                session[:user_id] = @user.id
+                
+            else 
+                redirect '/login'
+            end 
         else 
-            redirect '/sessions/login'
-        end 
+            redirect '/login'
+        end
     end
 
     get '/signup' do 
-        erb :"registrations/signup"
+        if logged_in?
+            redirect '/users/home'
+        else 
+            erb :"registrations/signup"
+        end
     end
 
     post '/signup' do 
         #binding.pry
-        @user = User.new(name: params["name"], email: params["email"], password: params["password"])
-        @user.save
-        session[:user_id] = @user.id
-        redirect '/users/home'
+        if logged_in? 
+            redirect '/users/home'
+        else 
+            @user = User.new(name: params["name"], email: params["email"], password: params["password"])
+            @user.save
+            session[:user_id] = @user.id
+            redirect '/users/home'
+        end
     end
 
     
 
     get '/users/home' do 
         #binding.pry
-        @user = current_user
-        erb :'users/home'
+        if logged_in? 
+            @user = current_user
+            erb :'users/home'
+        else
+            redirect '/login'
+        end
     end
 
     get '/logout' do 
-        session.clear
-        redirect '/'
+        if logged_in?
+            session.clear
+            redirect '/'
+        else 
+            redirect '/login'
+        end
     end
 
 end 

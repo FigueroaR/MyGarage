@@ -1,0 +1,13 @@
+<h1> Edit your Vehicle </h1>
+
+<form  action="/fix/<%=@car.id%>" method="POST">
+  <!-- method override  here -->
+    <input id="hidden" type="hidden" name="_method" value="patch">
+    <br>
+    <input type="text" placeholder="make" name="make" value="<%=@car.make%>">
+    <br>
+    <input type="text" placeholder="model" name="model" value="<%=@car.model%>">
+    <br>
+    <input type="text" placeholder="year" name="year" value="<%=@car.year%>">
+    <input type="submit" name="Edit" value="Edit">
+</form>

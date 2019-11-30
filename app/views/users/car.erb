@@ -5,10 +5,14 @@
 
 
 
-<form action="/car/<%=@car.id%>" method="POST">
-<input id="hidden" type="hidden" name="_method" value="delete">
-<input type="submit" value="Delete" >
+<form action="/delete/<%=@car.id%>"      method="POST">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete" name="Delete" >
 </form>
 
+
+<br>
+<a href="/car/<%=@car.id%>/edit"> Edit Car Info </a>
+<br>
 
 <a href="/garage"> My Garage</a>
