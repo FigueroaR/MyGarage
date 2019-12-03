@@ -1,4 +1,6 @@
-<h1> Welcome, <%=@user.name%></h1>
+<img  src="images/trackday.jpg" class="img-responsive main-image" >
+
+<h1> Welcome, <%=@user.name.capitalize%></h1>
 <ul>
     <% @user.cars.each do |kar| %>
         <li><a href="/car/<%=kar.id%>"><%= kar.make %>, <%= kar.model %>, <%= kar.year %> </a></li>

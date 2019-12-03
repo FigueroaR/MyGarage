@@ -1,13 +1,24 @@
-<h1> Welcome, <%=@user.name%> </h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel=”stylesheet” type=”text/css” href=”/style.css” />
+  </head>
+  <body>
+    
+    <h1> Welcome, <%=@user.name.capitalize%> </h1>
 
-<%Car.all.each do |c| %>
-  <li><a href="/car/<%=c.id%>"><%=c.user.name%>, <%=c.model%>, <%=c.make%>, <%=c.year%></a></li>
-<%end%>
+
+    <%Car.all.each do |c| %>
+      <li><a href="/car/<%=c.id%>"><%=c.user.name%>, <%=c.model%>, <%=c.make%>, <%=c.year%></a></li>
+    <%end%>
 
 
-<br>
-<a href="/garage"> |My Garage|</a>
-<br>
-<a href="/users/home">|Home|</a>
-<br>
-<a href="/logout"> |Log Out| </a>
+    <br>
+    <a href="/garage"> |My Garage|</a>
+    <br>
+    <a href="/users/home">|Home|</a>
+    <br>
+    <a href="/logout"> |Log Out| </a>
+  </body>
+</html>
+

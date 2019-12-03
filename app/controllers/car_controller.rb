@@ -23,9 +23,13 @@ class CarController < ApplicationController
     post '/car' do 
         #binding.pry
         if logged_in?
-            @car = current_user.cars.new(make: params["make"], model: params["model"], year: params["year"])
-            @car.save
-            redirect "/car/#{@car.id}"
+            @car = current_user.cars.build(make: params["make"], model: params["model"], year: params["year"])
+            if params["make"] == "" || params["model"] =="" || params["year"] == ""
+                redirect '/new/car'
+            else
+                @car.save
+                redirect "/car/#{@car.id}"
+            end
         else 
             redirect '/login'
         end 
@@ -51,11 +55,15 @@ class CarController < ApplicationController
         #binding.pry
         if logged_in?
             @car = current_user.cars.find_by(id: params[:id])
-            @car.update(make: params[:make])
-            @car.update(year: params[:model])
-            @car.update(year: params[:year])
-            @car.save
-            redirect "/car/#{@car.id}"
+            if params["make"] == "" || params["model"] =="" || params["year"] == ""
+                redirect "/car/#{@car.id}/edit"
+            else
+                @car.update(make: params[:make])
+                @car.update(year: params[:model])
+                @car.update(year: params[:year])
+                @car.save
+                redirect "/car/#{@car.id}"
+            end
         else 
             redirect '/login'
         end
