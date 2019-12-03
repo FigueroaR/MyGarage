@@ -50,7 +50,7 @@ class CarController < ApplicationController
     patch '/car/:id' do 
         #binding.pry
         if logged_in?
-            @car = Car.find_by(id: params[:id])
+            @car = current_user.cars.find_by(id: params[:id])
             @car.update(make: params[:make])
             @car.update(year: params[:model])
             @car.update(year: params[:year])
@@ -64,7 +64,7 @@ class CarController < ApplicationController
     get '/car/:id/edit' do
         #binding.pry 
         if logged_in?
-            @car = Car.find_by(id: params[:id])
+            @car = current_user.cars.find_by(id: params[:id])
             if @car.user_id == current_user.id
             erb :"car/edit_car"
             else
@@ -79,7 +79,7 @@ class CarController < ApplicationController
     delete '/delete/:id' do
         #binding.pry 
         if logged_in? 
-            @car = Car.find_by(id: params[:id])
+            @car = current_user.cars.find_by(id: params[:id])
             if @car.user_id == current_user.id
                 @car.delete
                 redirect "/garage"

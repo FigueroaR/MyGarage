@@ -11,22 +11,24 @@ class UserController < ApplicationController
     end
 
     post '/login' do 
-        if logged_in?
+        #binding.pry
+        if !logged_in?
             @user = User.find_by(email: params[:email])
         #binding.pry
             if @user != nil && @user.authenticate(params[:password]) 
                 # set our sesssion hash and redirect accordingly
                 session[:user_id] = @user.id
-                
+                redirect '/users/home'
             else 
                 redirect '/login'
             end 
         else 
-            redirect '/login'
+            '/users/home'
         end
     end
 
     get '/signup' do 
+        #
         if logged_in?
             redirect '/users/home'
         else 
