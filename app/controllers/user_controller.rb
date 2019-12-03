@@ -1,6 +1,7 @@
 require 'pry'
 class UserController < ApplicationController
 
+    
     get '/login' do 
         #binding.pry
         if logged_in?
@@ -60,7 +61,13 @@ class UserController < ApplicationController
         end
     end
 
-    get '/logout' do 
+    get '/users/:slug' do 
+        #binding.pry
+        @user = User.find_by_slug(params[:slug])
+        erb :'users/theirgarage'
+    end 
+
+    get '/loggedout' do 
         if logged_in?
             session.clear
             redirect '/'
@@ -68,5 +75,14 @@ class UserController < ApplicationController
             redirect '/login'
         end
     end
+
+    get '/logout' do 
+        if logged_in?
+            erb :"/sessions/logout"
+        else 
+            redirect '/login'
+        end
+    end
+    
 
 end 

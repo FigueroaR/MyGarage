@@ -1,0 +1,11 @@
+
+<br>
+<h1> <%=@user.name.capitalize%>'s Garage</h1>
+<ul>
+    <% @user.cars.each do |kar| %>
+        <li><a href="/car/<%=kar.id%>"><%= kar.make %>, <%= kar.model %>, <%= kar.year %> </a></li>
+    <% end %>
+</ul>
+
+<br>
+<a href="/users/home">Home</a>

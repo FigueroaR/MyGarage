@@ -1,16 +1,13 @@
 
 
 <h1> <%=@car.make%> </h1>
-<h2> model:<%=@car.model %> </h2>
-<h3> year:<%=@car.year %> </h3>
-<h4> ID:<%= @car.id%></h4>
+<h2> model: <%=@car.model %> </h2>
+<h3> year: <%=@car.year %> </h3>
+<h4> Garage ID: <%= @car.id%></h4>
+<br>
+<br>
 
 
-
-<form action="/delete/<%=@car.id%>"      method="POST">
-  <input id="hidden" type="hidden" name="_method" value="delete">
-  <input type="submit" value="Delete" name="Delete" >
-</form>
 
 
 <br>
@@ -20,3 +17,8 @@
 <a href="/garage"> My Garage</a>
 <br>
 <a href="/users/home">Home</a>
+<br>
+<form action="/delete/<%=@car.id%>"      method="POST">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete" name="Delete" >
+</form>
