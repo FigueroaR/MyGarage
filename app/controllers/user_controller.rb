@@ -64,7 +64,7 @@ class UserController < ApplicationController
     get '/users/:slug' do 
         #binding.pry
         @user = User.find_by_slug(params[:slug])
-        erb :'users/theirgarage'
+        erb :'cars/theirgarage'
     end 
 
     get '/loggedout' do 

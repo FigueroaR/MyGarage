@@ -3,10 +3,10 @@
 <h1> Welcome, <%=@user.name.capitalize%></h1>
 <ul>
     <% @user.cars.each do |kar| %>
-        <li><a href="/car/<%=kar.id%>"><%= kar.make %>, <%= kar.model %>, <%= kar.year %> </a></li>
+        <li><a href="/cars/<%=kar.id%>"><%= kar.make %>, <%= kar.model %>, <%= kar.year %> </a></li>
     <% end %>
 </ul>
 <br>
-<a href="/new/car">Add Car</a>
+<a href="/new/cars">Add Car</a>
 <br>
 <a href="/users/home">Home</a>

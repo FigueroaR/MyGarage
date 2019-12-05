@@ -3,7 +3,7 @@ class CarController < ApplicationController
     get '/garage' do 
         if logged_in?
             @user = current_user
-            erb :"users/garage"
+            erb :"cars/garage"
         else 
             redirect '/login'
         end
@@ -11,24 +11,24 @@ class CarController < ApplicationController
     
     
     #create new car
-    get '/new/car' do 
+    get '/new/cars' do 
         if logged_in?
-            erb :'car/new_car'
+            erb :'cars/new'
         else
             redirect '/login'
         end
     end
 
     #save new car / then go to car ID
-    post '/car' do 
+    post '/cars' do 
         #binding.pry
         if logged_in?
             @car = current_user.cars.build(make: params["make"], model: params["model"], year: params["year"])
             if params["make"] == "" || params["model"] =="" || params["year"] == ""
-                redirect '/new/car'
+                redirect '/new/cars'
             else
                 @car.save
-                redirect "/car/#{@car.id}"
+                redirect "/cars/#{@car.id}"
             end
         else 
             redirect '/login'
@@ -36,27 +36,27 @@ class CarController < ApplicationController
     end
 
     #iterate through my garage
-    get '/car/:id' do 
+    get '/cars/:id' do 
         #binding.pry
         if logged_in?
             @car = Car.find_by_id(params[:id])
             @user = @car.user
             if @car.user_id == current_user.id
-                erb :'users/car'
+                erb :'cars/car'
             else 
-                erb :'car/show'
+                erb :'cars/show'
             end
         else 
             redirect '/login'
         end 
     end
 
-    get '/car/:id/edit' do
+    get '/cars/:id/edit' do
         #binding.pry 
         if logged_in?
             @car = current_user.cars.find_by(id: params[:id])
             if @car.user_id == current_user.id
-                erb :"car/edit_car"
+                erb :"cars/edit"
             else
                 redirect "/users/home"
             end
@@ -65,18 +65,18 @@ class CarController < ApplicationController
         end
     end
 
-    patch '/car/:id' do 
+    patch '/cars/:id' do 
         #binding.pry
         if logged_in?
             @car = current_user.cars.find_by(id: params[:id])
             if params["make"] == "" || params["model"] =="" || params["year"] == ""
-                redirect "/car/#{@car.id}/edit"
+                redirect "/cars/#{@car.id}/edit"
             else
                 @car.update(make: params[:make])
                 @car.update(model: params[:model])
                 @car.update(year: params[:year])
                 @car.save
-                redirect "/car/#{@car.id}"
+                redirect "/cars/#{@car.id}"
             end
         else 
             redirect '/login'
