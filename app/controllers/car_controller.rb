@@ -21,7 +21,6 @@ class CarController < ApplicationController
 
     #save new car / then go to car ID
     post '/cars' do 
-        #binding.pry
         if logged_in?
             @car = current_user.cars.build(make: params["make"], model: params["model"], year: params["year"])
             if params["make"] == "" || params["model"] =="" || params["year"] == ""
@@ -35,9 +34,7 @@ class CarController < ApplicationController
         end 
     end
 
-    #iterate through my garage
     get '/cars/:id' do 
-        #binding.pry
         if logged_in?
             @car = Car.find_by_id(params[:id])
             @user = @car.user
@@ -51,8 +48,7 @@ class CarController < ApplicationController
         end 
     end
 
-    get '/cars/:id/edit' do
-        #binding.pry 
+    get '/cars/:id/edit' do 
         if logged_in?
             @car = current_user.cars.find_by(id: params[:id])
             if @car.user_id == current_user.id
@@ -66,15 +62,12 @@ class CarController < ApplicationController
     end
 
     patch '/cars/:id' do 
-        #binding.pry
         if logged_in?
             @car = current_user.cars.find_by(id: params[:id])
             if params["make"] == "" || params["model"] =="" || params["year"] == ""
                 redirect "/cars/#{@car.id}/edit"
             else
-                @car.update(make: params[:make])
-                @car.update(model: params[:model])
-                @car.update(year: params[:year])
+                @car.update(make: params[:make], model: params[:model], year: params[:year])
                 @car.save
                 redirect "/cars/#{@car.id}"
             end
@@ -84,7 +77,7 @@ class CarController < ApplicationController
     end
 
     delete '/delete/:id' do
-        #binding.pry 
+        
         if logged_in? 
             @car = current_user.cars.find_by(id: params[:id])
             if @car.user_id == current_user.id
