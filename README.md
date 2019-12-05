@@ -26,7 +26,6 @@ In you terminal run
 ```bundle
 Bundle Install
 ````
-## Run
 
 Then run 
 ```run
