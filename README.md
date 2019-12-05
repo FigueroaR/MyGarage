@@ -11,9 +11,7 @@ A "has many" and "belongs to" asscoaition.
 
 The app gives the user their own "garage" where they can 
 
-Create, Read, Update, Delete, cars(objects)
-&
-has Restful routes.
+Create, Read, Update, Delete, cars(objects) & has Restful routes.
 
 ## Install I
 
@@ -43,6 +41,7 @@ http://localhost:9393
 
 DONE.
 
+
 ## Install II 
 
 Install Via Github Desktop
@@ -63,9 +62,27 @@ Clone URL
 &
 
 Open in Visual Studio Code
-
 ```
 https://code.visualstudio.com
+```
+
+In you terminal run
+```bundle
+Bundle Install
+````
+
+Then run 
+```run
+shotgun
+```
+
+In your Browser paste this address
+```
+http://127.0.0.1:9393/
+```
+or
+```
+http://localhost:9393
 ```
 
 DONE.
